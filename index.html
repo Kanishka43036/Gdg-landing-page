@@ -1,0 +1,2907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GDG DevFest 2026 | Google Developer Groups</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================
+           GLOBAL
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+    --blue: #4285f4;
+    --red: #ea4335;
+    --yellow: #fbbc05;
+    --green: #34a853;
+
+    --dark: #101828;
+    --gray: #667085;
+    --light: #f7f9fc;
+    --white: #ffffff;
+    --border: #e5e7eb;
+
+    --blue-light: #eaf2ff;
+    --red-light: #fff0ee;
+    --yellow-light: #fff8df;
+    --green-light: #eaf8ef;
+}
+
+        body {
+            font-family: "Inter", sans-serif;
+            color: var(--dark);
+            background: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .container {
+            width: min(1150px, 90%);
+            margin: auto;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-title span {
+            color: var(--blue);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 13px;
+        }
+
+        .section-title h2 {
+            font-size: 42px;
+            margin-top: 10px;
+            font-weight: 800;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 650px;
+            margin: 15px auto 0;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,0.94);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid transparent;
+            transition: 0.3s;
+        }
+
+        header.scrolled {
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.06);
+        }
+
+        nav {
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--blue);
+        }
+
+        .register-btn {
+            border: none;
+            background: var(--blue);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(66,133,244,0.3);
+        }
+
+        .menu-btn {
+            display: none;
+            border: none;
+            background: transparent;
+            font-size: 28px;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 100vh;
+            padding-top: 150px;
+            display: flex;
+            align-items: center;
+    background:
+        radial-gradient(circle at 10% 20%, rgba(66, 133, 244, 0.18), transparent 28%),
+        radial-gradient(circle at 90% 20%, rgba(234, 67, 53, 0.15), transparent 25%),
+        radial-gradient(circle at 75% 90%, rgba(251, 188, 5, 0.16), transparent 25%),
+        linear-gradient(135deg, #ffffff 0%, #f7faff 100%);
+}
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            color: var(--blue);
+            font-weight: 700;
+            letter-spacing: 2px;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 7vw, 82px);
+            line-height: 1.02;
+            letter-spacing: -3px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span:nth-child(1) {
+            color: var(--blue);
+        }
+
+        .hero h1 span:nth-child(2) {
+            color: var(--red);
+        }
+
+        .hero-description {
+            font-size: 18px;
+            color: var(--gray);
+            max-width: 650px;
+            margin-bottom: 30px;
+        }
+
+        .event-info {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 35px;
+        }
+
+        .event-info div {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            color: #344054;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            padding: 14px 25px;
+            border-radius: 8px;
+            font-weight: 700;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .primary-btn {
+            background: var(--blue);
+            color: white;
+        }
+
+        .secondary-btn {
+            background: white;
+            border: 1px solid var(--border);
+        }
+
+        .primary-btn:hover,
+        .secondary-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            position: relative;
+            min-height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tech-circle {
+            width: 330px;
+            height: 330px;
+            border-radius: 50%;
+            border: 2px dashed rgba(66,133,244,0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: rotate 20s linear infinite;
+        }
+
+        .tech-circle::before,
+        .tech-circle::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .tech-circle::before {
+            width: 220px;
+            height: 220px;
+            border: 2px solid rgba(234,67,53,0.3);
+        }
+
+        .tech-circle::after {
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(
+                135deg,
+                var(--blue),
+                var(--green)
+            );
+            box-shadow: 0 20px 60px rgba(66,133,244,0.35);
+        }
+
+        .code-card {
+            position: absolute;
+            background: white;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+            padding: 15px 20px;
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        .code-card.one {
+            top: 40px;
+            left: 10px;
+        }
+
+        .code-card.two {
+            bottom: 40px;
+            right: 0;
+        }
+
+        .code-card.three {
+            top: 180px;
+            right: -20px;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+
+        /* =========================
+           COUNTDOWN
+        ========================= */
+
+        .countdown-wrapper {
+            margin-top: 60px;
+            padding: 30px;
+            background: var(--dark);
+            color: white;
+            border-radius: 18px;
+        }
+
+        .countdown-title {
+            text-align: center;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.7;
+            margin-bottom: 20px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            text-align: center;
+        }
+
+        .countdown-box strong {
+            display: block;
+            font-size: 38px;
+        }
+
+        .countdown-box span {
+            font-size: 11px;
+            text-transform: uppercase;
+            opacity: 0.6;
+        }
+
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        .about {
+            background: var(--light);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 34px;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 28px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        .feature-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .feature-card h4 {
+            margin-bottom: 6px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+
+        /* =========================
+           HIGHLIGHTS
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 35px 20px;
+            border: 1px solid var(--border);
+            border-radius: 15px;
+        }
+
+        .stat-card h3 {
+            font-size: 42px;
+        }
+
+        .stat-card p {
+            color: var(--gray);
+        }
+
+
+        /* =========================
+           SPEAKERS
+        ========================= */
+
+        .speaker-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .speaker-card {
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            overflow: hidden;
+            background: white;
+            transition: 0.3s;
+        }
+
+        .speaker-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .speaker-img {
+            height: 280px;
+            width: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .speaker-info {
+            padding: 22px;
+        }
+
+        .speaker-info h3 {
+            margin-bottom: 4px;
+        }
+
+        .speaker-role {
+            color: var(--blue);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .speaker-info p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           SCHEDULE
+        ========================= */
+
+        .schedule {
+            background: var(--light);
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 120px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #dbe2ea;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 40px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .time {
+            font-weight: 700;
+            color: var(--blue);
+            text-align: right;
+        }
+
+        .timeline-card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .timeline-card::before {
+            content: "";
+            position: absolute;
+            left: -49px;
+            top: 25px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--blue);
+            border: 4px solid white;
+            box-shadow: 0 0 0 2px var(--blue);
+        }
+
+        .timeline-card p {
+            color: var(--gray);
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+
+        /* =========================
+           VENUE
+        ========================= */
+
+        .venue-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .venue-card {
+            padding: 35px;
+            background: var(--light);
+            border-radius: 18px;
+        }
+
+        .venue-card h3 {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .venue-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .map {
+            height: 330px;
+            border-radius: 18px;
+            overflow: hidden;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(66,133,244,0.15),
+                    rgba(52,168,83,0.15)
+                );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+
+        /* =========================
+           FAQ
+        ========================= */
+
+        .faq-container {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .faq-question {
+            width: 100%;
+            border: none;
+            background: transparent;
+            padding: 22px 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: left;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            color: var(--gray);
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer p {
+            padding-bottom: 20px;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 150px;
+        }
+
+        .faq-item.active .faq-question span {
+            transform: rotate(45deg);
+        }
+
+        .faq-question span {
+            font-size: 25px;
+            transition: 0.3s;
+        }
+
+
+        /* =========================
+           REGISTER
+        ========================= */
+
+        .register-section {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+        }
+
+        .register-section h2 {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .register-section p {
+            color: #98a2b3;
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================
+           CONTACT
+        ========================= */
+
+        .contact {
+            background: var(--light);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 50px;
+        }
+
+        .contact-info h3 {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .contact-info p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .contact-detail {
+            margin: 15px 0;
+            font-weight: 600;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            border: 1px solid var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d0d5dd;
+            border-radius: 8px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(66,133,244,0.1);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #080d16;
+            color: white;
+            padding: 60px 0 25px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        footer p {
+            color: #98a2b3;
+            font-size: 14px;
+        }
+
+        footer h4 {
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #98a2b3;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            border-top: 1px solid #1f2937;
+            padding-top: 25px;
+            text-align: center;
+            color: #667085;
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.65);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 2000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            width: min(600px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 18px;
+            padding: 35px;
+            position: relative;
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            border: none;
+            background: transparent;
+            font-size: 28px;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 8px;
+        }
+
+        .modal-content > p {
+            color: var(--gray);
+            margin-bottom: 25px;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 40px 10px;
+        }
+
+        .success-message .success-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================
+           SCROLL ANIMATION
+        ========================= */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width: 900px) {
+
+            .nav-links {
+                position: absolute;
+                top: 75px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 25px 5%;
+                gap: 20px;
+                display: none;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-register {
+                display: none;
+            }
+
+            .hero-grid,
+            .about-content,
+            .venue-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding-top: 120px;
+            }
+
+            .hero-visual {
+                min-height: 350px;
+            }
+
+            .speaker-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media(max-width: 600px) {
+
+            section {
+                padding: 70px 0;
+            }
+
+            .section-title h2 {
+                font-size: 32px;
+            }
+
+            .hero h1 {
+                font-size: 50px;
+                letter-spacing: -2px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .event-info {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-buttons button {
+                width: 100%;
+            }
+
+            .tech-circle {
+                width: 250px;
+                height: 250px;
+            }
+
+            .code-card {
+                font-size: 11px;
+            }
+
+            .features,
+            .speaker-grid,
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .countdown {
+                gap: 15px;
+            }
+
+            .countdown-box strong {
+                font-size: 25px;
+            }
+
+            .countdown-wrapper {
+                padding: 22px 10px;
+            }
+
+            .timeline::before {
+                display: none;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .time {
+                text-align: left;
+            }
+
+            .timeline-card::before {
+                display: none;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .register-section h2 {
+                font-size: 34px;
+            }
+
+            .modal-content {
+                padding: 25px 20px;
+            }
+        }
+
+        /* GDG STYLE LOGO */
+.gdg-mark {
+    width: 46px;
+    height: 42px;
+    position: relative;
+}
+
+/* RED - upper left */
+.mark-red {
+    position: absolute;
+    width: 22px;
+    height: 9px;              /* thinner */
+    background: #ea4335;
+    border-radius: 10px;
+    left: 1px;                /* left side */
+    top: 7px;
+    transform: rotate(-30deg);
+}
+
+/* BLUE - lower left */
+.mark-blue {
+    position: absolute;
+    width: 22px;
+    height: 9px;              /* thinner */
+    background: #4285f4;
+    border-radius: 10px;
+    left: 1px;
+    top: 26px;
+    transform: rotate(30deg);
+}
+
+/* GREEN - upper right */
+.mark-green {
+    position: absolute;
+    width: 22px;
+    height: 9px;              /* thinner */
+    background: #34a853;
+    border-radius: 10px;
+    right: 1px;               /* pushes it to right */
+    top: 7px;
+    transform: rotate(30deg);
+}
+
+/* YELLOW - lower right */
+.mark-yellow {
+    position: absolute;
+    width: 22px;
+    height: 9px;              /* thinner */
+    background: #fbbc05;
+    border-radius: 10px;
+    right: 1px;
+    top: 26px;
+    transform: rotate(-30deg);
+}
+.about-section {
+    background: #ffffff;
+}
+
+.highlights-section {
+    background: linear-gradient(135deg, #f7faff, #fffdf5);
+}
+
+.speakers-section {
+    background: #ffffff;
+}
+
+.schedule-section {
+    background: #f8fbff;
+}
+
+.venue-section {
+    background: linear-gradient(135deg, #ffffff, #f5fbf7);
+}
+
+.faq-section {
+    background: #ffffff;
+}
+.speaker-card:nth-child(1) {
+    border-top: 4px solid var(--blue);
+}
+
+.speaker-card:nth-child(2) {
+    border-top: 4px solid var(--red);
+}
+
+.speaker-card:nth-child(3) {
+    border-top: 4px solid var(--green);
+}
+
+.speaker-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 40px rgba(66, 133, 244, 0.15);
+}
+.btn-primary {
+    background: linear-gradient(
+        90deg,
+        #4285f4,
+        #34a853
+    );
+    color: white;
+    border: none;
+    box-shadow: 0 8px 20px rgba(66, 133, 244, 0.25);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(66, 133, 244, 0.32);
+}
+.section-title::after {
+    content: "";
+    display: block;
+    width: 70px;
+    height: 4px;
+    margin: 14px auto 0;
+    border-radius: 10px;
+    background: linear-gradient(
+        90deg,
+        #4285f4 0%,
+        #34a853 35%,
+        #fbbc05 65%,
+        #ea4335 100%
+    );
+}
+.countdown-box {
+    background: rgba(160, 95, 26, 0.9);
+    border: 1px solid rgba(66, 133, 244, 0.15);
+    box-shadow: 0 10px 35px rgba(66, 133, 244, 0.12);
+}
+
+.countdown-item:nth-child(1) {
+    border-top: 3px solid #4285f4;
+}
+
+.countdown-item:nth-child(2) {
+    border-top: 3px solid #ea4335;
+}
+
+.countdown-item:nth-child(3) {
+    border-top: 3px solid #fbbc05;
+}
+
+.countdown-item:nth-child(4) {
+    border-top: 3px solid #34a853;
+}
+.hero {
+    position: relative;
+}
+
+/* Handwritten-style remarks */
+.hero-remark {
+    position: absolute;
+    font-family: "Comic Sans MS", "Segoe Print", cursive;
+    font-weight: 700;
+    color: #173b73;
+    line-height: 1.05;
+    z-index: 2;
+}
+
+/* Top-right */
+.remark-learn {
+    top: 35px;
+    right: 45px;
+    font-size: 22px;
+    transform: rotate(-6deg);
+}
+
+/* Left side */
+.remark-join {
+    left: 35px;
+    top: 45%;
+    font-size: 18px;
+    color: #4285f4;
+    transform: rotate(-8deg);
+}
+
+/* Bottom-right */
+.remark-build {
+    right: 40px;
+    bottom: 45px;
+    font-size: 17px;
+    color: #34a853;
+    transform: rotate(5deg);
+}
+.registration-remark {
+    font-family: "Comic Sans MS", "Segoe Print", cursive;
+    font-size: 22px;
+    font-weight: 700;
+    color: #173b73;
+    transform: rotate(-7deg);
+    margin-bottom: 10px;
+}
+    </style>
+</head>
+
+
+<body>
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<header id="navbar">
+
+    <div class="container">
+
+        <nav>
+
+          <a href="#home" class="logo">
+    <div class="gdg-logo">
+        <div class="gdg-mark">
+            <span class="mark-blue"></span>
+            <span class="mark-red"></span>
+            <span class="mark-yellow"></span>
+            <span class="mark-green"></span>
+        </div>
+    </div>
+
+    <span class="logo-text">
+        <strong>Google Developer Group</strong> 
+    </span>
+</a>
+
+            <ul class="nav-links" id="navLinks">
+
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#speakers">Speakers</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#venue">Venue</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+
+            </ul>
+
+            <button class="register-btn nav-register" onclick="openModal()">
+                Register Now
+            </button>
+
+            <button class="menu-btn" id="menuBtn">
+                ☰
+            </button>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero" id="home">
+
+    <div class="container">
+
+        <div class="hero-grid">
+
+            <div class="hero-content reveal">
+
+                <div class="eyebrow">
+                    GOOGLE DEVELOPER GROUPS PRESENTS
+                </div>
+
+                <h1>
+                    <span>GDG</span>
+                    <span> DevFest</span>
+                    2026
+                </h1>
+
+                <p class="hero-description">
+                    Join developers, students, innovators and technology
+                    enthusiasts for a day of learning, building,
+                    networking and creating the future together.
+                </p>
+
+                <div class="event-info">
+
+                    <div>
+                        📅 December 20, 2026
+                    </div>
+
+                    <div>
+                        ⏰ 9:00 AM onwards
+                    </div>
+
+                    <div>
+                        📍 UPES, Dehradun
+                    </div>
+
+                </div>
+
+                <div class="hero-buttons">
+
+                    <button
+                        class="primary-btn"
+                        onclick="openModal()">
+                        Register Now →
+                    </button>
+
+                    <a href="#about">
+                        <button class="secondary-btn">
+                            Explore Event
+                        </button>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-visual reveal">
+
+                <div class="tech-circle"></div>
+
+                <div class="code-card one">
+                    &lt;build /&gt;
+                </div>
+
+                <div class="code-card two">
+                    AI + WEB + CLOUD
+                </div>
+
+                <div class="code-card three">
+                    { innovation: true }
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- COUNTDOWN -->
+
+        <div class="countdown-wrapper reveal">
+
+            <div class="countdown-title">
+                Event Starts In
+            </div>
+
+            <div class="countdown">
+
+                <div class="countdown-box">
+                    <strong id="days">00</strong>
+                    <span>Days</span>
+                </div>
+
+                <div class="countdown-box">
+                    <strong id="hours">00</strong>
+                    <span>Hours</span>
+                </div>
+
+                <div class="countdown-box">
+                    <strong id="minutes">00</strong>
+                    <span>Minutes</span>
+                </div>
+
+                <div class="countdown-box">
+                    <strong id="seconds">00</strong>
+                    <span>Seconds</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section class="about" id="about">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <span>About The Event</span>
+
+            <h2>Build. Learn. Connect.</h2>
+
+            <p>
+                An immersive technology experience designed for
+                curious minds and passionate developers.
+            </p>
+
+        </div>
+
+
+        <div class="about-content">
+
+            <div class="about-text reveal">
+
+                <h3>
+                    One Event. Endless Possibilities.
+                </h3>
+
+                <p>
+                    GDG DevFest brings together developers,
+                    students, designers, entrepreneurs and
+                    technology enthusiasts under one roof.
+                </p>
+
+                <p>
+                    Learn from industry experts, explore emerging
+                    technologies, build innovative projects and
+                    connect with a community that loves technology
+                    as much as you do.
+                </p>
+
+            </div>
+
+
+            <div class="features">
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">💡</div>
+                    <h4>Learn</h4>
+                    <p>
+                        Learn from experienced developers and
+                        industry experts.
+                    </p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🛠️</div>
+                    <h4>Build</h4>
+                    <p>
+                        Turn ideas into real-world projects.
+                    </p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🤝</div>
+                    <h4>Connect</h4>
+                    <p>
+                        Meet developers and tech enthusiasts.
+                    </p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🚀</div>
+                    <h4>Grow</h4>
+                    <p>
+                        Improve your technical and professional skills.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     HIGHLIGHTS
+========================= -->
+
+<section>
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <span>Event Highlights</span>
+
+            <h2>What To Expect</h2>
+
+        </div>
+
+        <div class="stats">
+
+            <div class="stat-card reveal">
+                <h3>100+</h3>
+                <p>Participants</p>
+            </div>
+
+            <div class="stat-card reveal">
+                <h3>10+</h3>
+                <p>Mentors</p>
+            </div>
+
+            <div class="stat-card reveal">
+                <h3>5+</h3>
+                <p>Speakers</p>
+            </div>
+
+            <div class="stat-card reveal">
+                <h3>1</h3>
+                <p>Amazing Experience</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SPEAKERS
+========================= -->
+
+<section id="speakers">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <span>Our Speakers</span>
+
+            <h2>Meet The Speakers</h2>
+
+            <p>
+                Learn directly from people building the future
+                of technology.
+            </p>
+
+        </div>
+
+
+        <div class="speaker-grid">
+
+
+            <div class="speaker-card reveal">
+
+                <img
+                    class="speaker-img"
+                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=700&q=80"
+                    alt="Speaker">
+
+                <div class="speaker-info">
+
+                    <h3>Arjun Mehta</h3>
+
+                    <div class="speaker-role">
+                        Senior Software Engineer
+                    </div>
+
+                    <p>
+                        Passionate about AI, cloud computing
+                        and building scalable products.
+                    </p>
+
+                    <div class="social-links">
+                        <a href="#" target="_blank">in</a>
+                        <a href="#" target="_blank">X</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="speaker-card reveal">
+
+                <img
+                    class="speaker-img"
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=700&q=80"
+                    alt="Speaker">
+
+                <div class="speaker-info">
+
+                    <h3>Priya Sharma</h3>
+
+                    <div class="speaker-role">
+                        AI & ML Developer
+                    </div>
+
+                    <p>
+                        Working on intelligent systems and
+                        the future of artificial intelligence.
+                    </p>
+
+                    <div class="social-links">
+                        <a href="#" target="_blank">in</a>
+                        <a href="#" target="_blank">X</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="speaker-card reveal">
+
+                <img
+                    class="speaker-img"
+                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=80"
+                    alt="Speaker">
+
+                <div class="speaker-info">
+
+                    <h3>Rahul Verma</h3>
+
+                    <div class="speaker-role">
+                        Google Cloud Specialist
+                    </div>
+
+                    <p>
+                        Cloud architect helping teams build
+                        reliable and scalable applications.
+                    </p>
+
+                    <div class="social-links">
+                        <a href="#" target="_blank">in</a>
+                        <a href="#" target="_blank">X</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SCHEDULE
+========================= -->
+
+<section class="schedule" id="schedule">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <span>Event Schedule</span>
+
+            <h2>A Day Full Of Tech</h2>
+
+        </div>
+
+
+        <div class="timeline">
+
+
+            <div class="timeline-item reveal">
+
+                <div class="time">
+                    09:00 AM
+                </div>
+
+                <div class="timeline-card">
+
+                    <h3>Registration & Networking</h3>
+
+                    <p>
+                        Meet fellow participants and connect
+                        with the GDG community.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item reveal">
+
+                <div class="time">
+                    10:00 AM
+                </div>
+
+                <div class="timeline-card">
+
+                    <h3>Opening Ceremony</h3>
+
+                    <p>
+                        Welcome address and introduction
+                        to the event.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item reveal">
+
+                <div class="time">
+                    10:30 AM
+                </div>
+
+                <div class="timeline-card">
+
+                    <h3>Keynote Session</h3>
+
+                    <p>
+                        Discover the latest trends shaping
+                        the technology industry.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item reveal">
+
+                <div class="time">
+                    11:30 AM
+                </div>
+
+                <div class="timeline-card">
+
+                    <h3>Technical Workshop</h3>
+
+                    <p>
+                        Hands-on learning with modern
+                        developer technologies.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item reveal">
+
+                <div class="time">
+                    01:00 PM
+                </div>
+
+                <div class="timeline-card">
+
+                    <h3>Lunch & Networking</h3>
+
+                    <p>
+                        Recharge and connect with fellow
+                        developers.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item reveal">
+
+                <div class="time">
+                    02:00 PM
+                </div>
+
+                <div class="timeline-card">
+
+                    <h3>Hackathon / Hands-on Session</h3>
+
+                    <p>
+                        Build something amazing with your team.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item reveal">
+
+                <div class="time">
+                    05:00 PM
+                </div>
+
+                <div class="timeline-card">
+
+                    <h3>Project Showcase</h3>
+
+                    <p>
+                        Teams present their innovative projects.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item reveal">
+
+                <div class="time">
+                    06:00 PM
+                </div>
+
+                <div class="timeline-card">
+
+                    <h3>Closing Ceremony & Awards</h3>
+
+                    <p>
+                        Celebrate achievements and close
+                        the event together.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     VENUE
+========================= -->
+
+<section id="venue">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <span>Where We Meet</span>
+
+            <h2>Event Venue</h2>
+
+        </div>
+
+
+        <div class="venue-content">
+
+            <div class="venue-card reveal">
+
+                <h3>UPES Dehradun</h3>
+
+                <p>
+                    Bidholi Campus, Dehradun,
+                    Uttarakhand, India
+                </p>
+
+                <p>
+                    📅 December 20, 2026<br>
+                    ⏰ 9:00 AM onwards
+                </p>
+
+                <a
+                    href="https://www.google.com/maps/search/?api=1&query=UPES+Dehradun"
+                    target="_blank">
+
+                    <button class="primary-btn">
+                        Get Directions →
+                    </button>
+
+                </a>
+
+            </div>
+
+
+            <div class="map reveal">
+
+                <div>
+                    <div style="font-size:55px;">📍</div>
+
+                    <h3>UPES Dehradun</h3>
+
+                    <p>
+                        Click "Get Directions" to open Google Maps.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FAQ
+========================= -->
+
+<section id="faq">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <span>FAQ</span>
+
+            <h2>Frequently Asked Questions</h2>
+
+        </div>
+
+
+        <div class="faq-container">
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+                    Who can participate?
+                    <span>+</span>
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Students, developers, designers,
+                        entrepreneurs and technology
+                        enthusiasts are welcome.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+                    Is registration free?
+                    <span>+</span>
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Yes, registration is completely free
+                        unless otherwise mentioned by the organizers.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+                    Do I need prior coding experience?
+                    <span>+</span>
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        No. Beginners are welcome and there
+                        will be sessions suitable for different
+                        skill levels.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+                    Can I participate individually?
+                    <span>+</span>
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Yes. You can register individually
+                        and form a team during the event.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+                    Will certificates be provided?
+                    <span>+</span>
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Certificates may be provided to
+                        registered participants depending
+                        on the event format.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     REGISTER CTA
+========================= -->
+
+<section class="register-section">
+
+    <div class="container reveal">
+
+        <h2>Ready to Join Us?</h2>
+
+        <p>
+            Reserve your spot and become part of the GDG community.
+        </p>
+
+        <button
+            class="primary-btn"
+            onclick="openModal()">
+
+            Register Now →
+
+        </button>
+        <div class="registration-remark">
+    ↙ Scan here!
+</div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<section class="contact" id="contact">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <span>Get In Touch</span>
+
+            <h2>Have Questions?</h2>
+
+        </div>
+
+
+        <div class="contact-grid">
+
+
+            <div class="contact-info reveal">
+
+                <h3>Let's Connect.</h3>
+
+                <p>
+                    Have questions about the event?
+                    Feel free to reach out to the GDG organizing team.
+                </p>
+
+                <div class="contact-detail">
+                    📧 gdg@example.com
+                </div>
+
+                <div class="contact-detail">
+                    📱 +91 98765 43210
+                </div>
+
+                <div class="contact-detail">
+                    📍 Dehradun, India
+                </div>
+
+            </div>
+
+
+            <form
+                class="contact-form reveal"
+                id="contactForm">
+
+                <div class="form-group">
+
+                    <label>Name</label>
+
+                    <input
+                        type="text"
+                        id="contactName"
+                        placeholder="Your name"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Email</label>
+
+                    <input
+                        type="email"
+                        id="contactEmail"
+                        placeholder="you@example.com"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Message</label>
+
+                    <textarea
+                        id="contactMessage"
+                        placeholder="Your message..."
+                        required></textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-btn">
+
+                    Send Message →
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+
+            <div>
+
+                <div class="footer-logo">
+                    GDG DevFest 2026
+                </div>
+
+                <p>
+                    Connecting developers, students and
+                    technology enthusiasts to build the future.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h4>Quick Links</h4>
+
+                <ul class="footer-links">
+
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#speakers">Speakers</a></li>
+                    <li><a href="#schedule">Schedule</a></li>
+
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h4>Follow Us</h4>
+
+                <ul class="footer-links">
+
+                    <li>
+                        <a href="#" target="_blank">
+                            Instagram
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" target="_blank">
+                            LinkedIn
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" target="_blank">
+                            GitHub
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" target="_blank">
+                            Twitter / X
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 GDG DevFest. All rights reserved.
+            <br>
+            Made with ❤️ by the GDG Team.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================
+     REGISTRATION MODAL
+========================= -->
+
+<div class="modal" id="registrationModal">
+
+    <div class="modal-content">
+
+        <button
+            class="close-modal"
+            onclick="closeModal()">
+            ×
+        </button>
+
+
+        <div id="registrationFormContainer">
+
+            <h2>Register for GDG DevFest</h2>
+
+            <p>
+                Reserve your spot for an amazing day of technology.
+            </p>
+
+
+            <form id="registrationForm">
+
+
+                <div class="form-group">
+
+                    <label>Full Name *</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your full name"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Email Address *</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="you@example.com"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Phone Number *</label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="10-digit phone number"
+                        pattern="[0-9]{10}"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>College / University *</label>
+
+                    <input
+                        type="text"
+                        id="college"
+                        placeholder="Your college"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Year of Study *</label>
+
+                    <select id="year" required>
+
+                        <option value="">
+                            Select your year
+                        </option>
+
+                        <option>1st Year</option>
+                        <option>2nd Year</option>
+                        <option>3rd Year</option>
+                        <option>4th Year</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Branch / Course *</label>
+
+                    <input
+                        type="text"
+                        id="branch"
+                        placeholder="e.g. Computer Science"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>LinkedIn / GitHub</label>
+
+                    <input
+                        type="url"
+                        id="social"
+                        placeholder="https://...">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Attendance Type *</label>
+
+                    <select id="attendance" required>
+
+                        <option value="">
+                            Select option
+                        </option>
+
+                        <option>Individual</option>
+                        <option>Team</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Team Name</label>
+
+                    <input
+                        type="text"
+                        id="team"
+                        placeholder="Optional">
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-btn"
+                    style="width:100%;">
+
+                    Submit Registration →
+
+                </button>
+
+
+            </form>
+
+        </div>
+
+
+        <div
+            class="success-message"
+            id="successMessage">
+
+            <div class="success-icon">
+                🎉
+            </div>
+
+            <h2>Registration Successful!</h2>
+
+            <p>
+                Thank you for registering for GDG DevFest 2026.
+                We look forward to seeing you there!
+            </p>
+
+            <button
+                class="primary-btn"
+                onclick="closeModal()">
+
+                Done
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="hero-remark remark-learn">
+    Learn<br>
+    Build<br>
+    Grow
+</div>
+
+<div class="hero-remark remark-join">
+    ✦ Join us!
+</div>
+
+<div class="hero-remark remark-build">
+    Build<br>
+    Something<br>
+    Amazing ✦
+</div>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+    /* =========================
+       MOBILE MENU
+    ========================= */
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+
+        navLinks.classList.toggle("active");
+
+        menuBtn.textContent =
+            navLinks.classList.contains("active")
+            ? "✕"
+            : "☰";
+
+    });
+
+
+    // Close mobile menu after clicking link
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            navLinks.classList.remove("active");
+
+            menuBtn.textContent = "☰";
+
+        });
+
+    });
+
+
+    /* =========================
+       NAVBAR SCROLL EFFECT
+    ========================= */
+
+    window.addEventListener("scroll", () => {
+
+        const navbar = document.getElementById("navbar");
+
+        if (window.scrollY > 50) {
+
+            navbar.classList.add("scrolled");
+
+        } else {
+
+            navbar.classList.remove("scrolled");
+
+        }
+
+    });
+
+
+    /* =========================
+       COUNTDOWN
+    ========================= */
+
+    // Change this date for your actual event
+    const eventDate = new Date("December 20, 2026 09:00:00").getTime();
+
+
+    function updateCountdown() {
+
+        const now = new Date().getTime();
+
+        const distance = eventDate - now;
+
+
+        if (distance <= 0) {
+
+            document.querySelector(".countdown").innerHTML =
+                "<h2>The event is live! 🎉</h2>";
+
+            return;
+
+        }
+
+
+        const days =
+            Math.floor(distance / (1000 * 60 * 60 * 24));
+
+        const hours =
+            Math.floor(
+                (distance % (1000 * 60 * 60 * 24))
+                / (1000 * 60 * 60)
+            );
+
+        const minutes =
+            Math.floor(
+                (distance % (1000 * 60 * 60))
+                / (1000 * 60)
+            );
+
+        const seconds =
+            Math.floor(
+                (distance % (1000 * 60))
+                / 1000
+            );
+
+
+        document.getElementById("days").textContent =
+            String(days).padStart(2, "0");
+
+        document.getElementById("hours").textContent =
+            String(hours).padStart(2, "0");
+
+        document.getElementById("minutes").textContent =
+            String(minutes).padStart(2, "0");
+
+        document.getElementById("seconds").textContent =
+            String(seconds).padStart(2, "0");
+
+    }
+
+
+    updateCountdown();
+
+    setInterval(updateCountdown, 1000);
+
+
+    /* =========================
+       REGISTRATION MODAL
+    ========================= */
+
+    const modal =
+        document.getElementById("registrationModal");
+
+
+    function openModal() {
+
+        modal.classList.add("active");
+
+        document.body.style.overflow = "hidden";
+
+    }
+
+
+    function closeModal() {
+
+        modal.classList.remove("active");
+
+        document.body.style.overflow = "auto";
+
+    }
+
+
+    // Close when clicking outside modal
+
+    modal.addEventListener("click", (event) => {
+
+        if (event.target === modal) {
+
+            closeModal();
+
+        }
+
+    });
+
+
+    // ESC key closes modal
+
+    document.addEventListener("keydown", (event) => {
+
+        if (event.key === "Escape") {
+
+            closeModal();
+
+        }
+
+    });
+
+
+    /* =========================
+       REGISTRATION FORM
+    ========================= */
+
+    const registrationForm =
+        document.getElementById("registrationForm");
+
+
+    registrationForm.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+
+        const phone =
+            document.getElementById("phone").value.trim();
+
+
+        // Validate phone number
+
+        if (!/^[0-9]{10}$/.test(phone)) {
+
+            alert("Please enter a valid 10-digit phone number.");
+
+            return;
+
+        }
+
+
+        // Store registration locally
+
+        const registration = {
+
+            name: document.getElementById("name").value,
+
+            email: document.getElementById("email").value,
+
+            phone: phone,
+
+            college: document.getElementById("college").value,
+
+            year: document.getElementById("year").value,
+
+            branch: document.getElementById("branch").value,
+
+            social: document.getElementById("social").value,
+
+            attendance:
+                document.getElementById("attendance").value,
+
+            team:
+                document.getElementById("team").value,
+
+            registeredAt:
+                new Date().toLocaleString()
+
+        };
+
+
+        localStorage.setItem(
+            "gdgRegistration",
+            JSON.stringify(registration)
+        );
+
+
+        // Hide form
+
+        document.getElementById(
+            "registrationFormContainer"
+        ).style.display = "none";
+
+
+        // Show success
+
+        document.getElementById(
+            "successMessage"
+        ).style.display = "block";
+
+    });
+
+
+    /* =========================
+       CONTACT FORM
+    ========================= */
+
+    const contactForm =
+        document.getElementById("contactForm");
+
+
+    contactForm.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+
+        const name =
+            document.getElementById("contactName").value;
+
+        alert(
+            `Thank you ${name}! Your message has been sent successfully.`
+        );
+
+
+        contactForm.reset();
+
+    });
+
+
+    /* =========================
+       FAQ ACCORDION
+    ========================= */
+
+    document.querySelectorAll(".faq-question")
+        .forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                const item =
+                    button.parentElement;
+
+
+                // Close other FAQ items
+
+                document.querySelectorAll(".faq-item")
+                    .forEach(other => {
+
+                        if (other !== item) {
+
+                            other.classList.remove("active");
+
+                        }
+
+                    });
+
+
+                item.classList.toggle("active");
+
+            });
+
+        });
+
+
+    /* =========================
+       SCROLL REVEAL
+    ========================= */
+
+    const observer =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("visible");
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.12
+            }
+        );
+
+
+    document.querySelectorAll(".reveal")
+        .forEach(element => {
+
+            observer.observe(element);
+
+        });
+
+
+    /* =========================
+       RESET REGISTRATION FORM
+       AFTER MODAL CLOSE
+    ========================= */
+
+    function resetRegistration() {
+
+        document.getElementById(
+            "registrationFormContainer"
+        ).style.display = "block";
+
+
+        document.getElementById(
+            "successMessage"
+        ).style.display = "none";
+
+
+        registrationForm.reset();
+
+    }
+
+</script>
+
+</body>
+</html>
